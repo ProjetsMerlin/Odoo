@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_blog_article_public,blog.article.public,model_mon_blog_article,,1,0,0,0
+access_blog_article_admin,blog.article.admin,model_mon_blog_article,base.group_user,1,1,1,1
+access_blog_tag_public,blog.tag.public,model_mon_blog_tag,,1,0,0,0
+access_blog_tag_admin,blog.tag.admin,model_mon_blog_tag,base.group_user,1,1,1,1
