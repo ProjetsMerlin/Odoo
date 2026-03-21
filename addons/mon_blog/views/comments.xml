@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="view_mon_blog_comment_list" model="ir.ui.view">
+            <field name="name">mon.blog.comment.list</field>
+            <field name="model">mon.blog.comment</field>
+            <field name="arch" type="xml">
+                <tree default_order="date_publication desc">
+                    <field name="date_publication"/>
+                    <field name="author_name"/>
+                    <field name="article_id"/>
+                    <field name="content"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_mon_blog_comment_form" model="ir.ui.view">
+            <field name="name">mon.blog.comment.form</field>
+            <field name="model">mon.blog.comment</field>
+            <field name="arch" type="xml">
+                <form string="Commentaire">
+                    <sheet>
+                        <group>
+                            <field name="article_id"/>
+                            <field name="author_name"/>
+                            <field name="date_publication"/>
+                        </group>
+                        <field name="content"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_mon_blog_comment" model="ir.actions.act_window">
+            <field name="name">Commentaires</field>
+            <field name="res_model">mon.blog.comment</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+    </data>
+</odoo>

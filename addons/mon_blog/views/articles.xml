@@ -1,0 +1,15 @@
+<odoo>
+    <template id="blog_list_template" name="Blog">
+        <t t-call="website.layout">
+            <div class="container my-5">
+                
+                <t t-call="mon_blog.page_header"/>
+                
+                <t t-call="mon_blog.blog_filter"/>
+                
+                <t t-call="mon_blog.blog_list"/>
+                
+            </div>
+        </t>
+    </template>
+</odoo>

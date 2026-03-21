@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- Vue liste -->
+        <record id="view_config_parameter_list" model="ir.ui.view">
+            <field name="name">Configuration - Mon Blog</field>
+            <field name="model">ir.config_parameter</field>
+            <field name="arch" type="xml">
+                <tree string="Paramètres">
+                    <field name="key"/>
+                    <field name="value"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Vue formulaire -->
+        <record id="view_config_parameter_form" model="ir.ui.view">
+            <field name="name">Configuration - Formulaire</field>
+            <field name="model">ir.config_parameter</field>
+            <field name="arch" type="xml">
+                <form string="Paramètre">
+                    <sheet>
+                        <group>
+                            <field name="key" readonly="1"/>
+                            <field name="value"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Menu accessible au client -->
+        <record id="action_blog_config" model="ir.actions.act_window">
+            <field name="name">Configuration Blog</field>
+            <field name="res_model">ir.config_parameter</field>
+            <field name="view_mode">list,form</field>
+            <field name="domain">[('key', 'like', 'mon_blog.')]</field>
+        </record>
+        
+    </data>
+</odoo>

@@ -6,7 +6,15 @@
     'depends': ['website'],
     'data': [
         'security/ir.model.access.csv',
+        'data/config.xml',
+        'views/dashboard.xml',
+        'views/includes/page_header.xml',
+        'views/includes/blog_filter.xml',
+        'views/includes/blog_list.xml',
+        'views/comments.xml',
         'views/templates.xml',
+        'views/articles.xml',
+        'views/article.xml',
     ],
     'assets': {
         'web.assets_frontend': [

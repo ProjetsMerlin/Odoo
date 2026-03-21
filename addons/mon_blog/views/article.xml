@@ -1,0 +1,83 @@
+<odoo>
+    <template id="blog_detail_template" name="Blog - Détail article">
+        <t t-set="title" t-value="'Blog - ' + article.name"/>
+        
+        <!-- <pre t-out="website.fields_get().keys()"/> -->
+        
+        <t t-call="website.layout">
+            <div class="container my-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        
+                        <hr/>
+                        
+                        <hr/>
+                        
+                        <!-- Tags -->
+                        <t t-if="article.tag_ids">
+                            <div class="mb-3">
+                                <t t-foreach="article.tag_ids" t-as="tag">
+                                    <span t-att-class="'badge bg-primary me-1 color_' + tag.color">
+                                        <t t-esc="tag.name"/>
+                                    </span>
+                                </t>
+                            </div>
+                        </t>
+                        
+                        <!-- Titre -->
+                        <h1 class="mb-3"><t t-esc="article.name"/></h1>
+                        
+                        <!-- Meta -->
+                        <div class="d-flex gap-3 text-muted small mb-4">
+                            <span><i class="fa fa-user me-1"/><t t-esc="article.auteur_id.name"/> | <t t-out="website.name"/></span>
+                            <span><i class="fa fa-calendar me-1"/><t t-esc="article.date_publication"/></span>
+                            <span><i class="fa fa-eye me-1"/><t t-esc="article.nb_vues"/>
+                                <!-- !!! trad -->
+                                vues
+                            </span>
+                        </div>
+                        
+                        <!-- Image -->
+                        <t t-if="article.image">
+                            <img t-attf-src="/web/image/mon.blog.article/#{article.id}/image" class="img-fluid rounded mb-4 w-100" alt="cover"/>
+                        </t>
+                        
+                        <!-- Résumé -->
+                        <p class="lead text-muted border-start border-primary ps-3 mb-4">
+                            <t t-esc="article.resume"/>
+                        </p>
+                        
+                        <!-- Contenu HTML -->
+                        <div class="blog-content">
+                            <t t-out="article.contenu"/>
+                        </div>
+                        
+                        <!-- Retour -->
+                        <div class="mt-5">
+                            <a href="/blog" class="btn btn-outline-secondary">
+                                ← Retour au blog
+                            </a>
+                        </div>
+                        
+                        <div class="mt-5">
+                            <!-- <t t-out="website.phone"/>-->
+                            <!-- <t t-out="website.email"/> -->
+                            <a class="inline-block mr-4" t-attf-href="website.social_facebook">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a class="inline-block mr-4" t-attf-href="website.social_instagram">
+                                <i class="fa fa-instagram"></i>
+                            </a>
+                            <a class="inline-block mr-4" t-attf-href="website.social_linkedin">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        </div>
+                        
+                        <hr/>
+                        
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -11,9 +11,12 @@ class BlogController(http.Controller):
         ])
         tags = request.env['mon.blog.tag'].sudo().search([])
 
+        get_param = request.env['ir.config_parameter'].sudo().get_param
+
         return request.render('mon_blog.blog_list_template', {
             'articles': articles,
             'tags': tags,
+            'text_no_articles': get_param('mon_blog.text_no_articles'),
         })
 
     @http.route('/blog/<string:slug>', type='http', auth='public', website=True)
@@ -37,7 +40,7 @@ class BlogController(http.Controller):
     def blog_by_tag(self, tag_name, **kwargs):
         """Filtrer par tag"""
         tag = request.env['mon.blog.tag'].sudo().search([
-            ('name', 'ilike', tag_name)
+            ('name', 'ilike', tag_name),
         ], limit=1)
 
         articles = request.env['mon.blog.article'].sudo().search([

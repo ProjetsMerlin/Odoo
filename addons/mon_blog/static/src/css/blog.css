@@ -25,3 +25,18 @@
     line-height: 1.8;
     color: #34495e;
 }
+
+.current {
+    font-weight: 600;
+    border: 2px solid black
+}
+
+.color_blue {
+    background-color: #3498db;
+    color: white;
+}
+
+.color_purple {
+    background-color: #9b59b6;
+    color: white;
+}

@@ -1,0 +1,23 @@
+<odoo>
+    <data>
+        <template id="blog_filter" name="Filtre du blog">
+            <div class="row mb-4">
+                <div class="col text-center">
+                    <a href="/blog" class="btn btn-sm btn-outline-secondary me-1">
+                        <!-- !!! trad -->
+                        Tous
+                    </a>
+                    <t t-set="current_tag" t-value="request.httprequest.path.split('/')[-1]"/>
+                    <t t-foreach="tags" t-as="tag">
+                        <t t-set="class_tag" t-value="'btn btn-sm btn-outline-primary px-6 py-8 color_' + str(tag.color)"/>
+                        <a t-attf-href="/blog/tag/{{ tag.name }}">
+                            <span t-attf-class="#{class_tag} #{'current' if current_tag == tag.name else ''}">
+                                <t t-out="tag.name.upper()"/>
+                            </span>
+                        </a>
+                    </t>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

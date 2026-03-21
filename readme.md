@@ -20,6 +20,8 @@ mon-projet-odoo/
         │   └── main.py
         ├── views/
         │   └── templates.xml
+        │   └── articles.xml
+        │   └── article.xml
         ├── security/
         │   └── ir.model.access.csv
         └── static/
@@ -27,26 +29,36 @@ mon-projet-odoo/
                 └── css/
                     └── blog.css
 
-## commandes utiles
+## commandes utiles Docker
 
 ### Démarrer les containers
+
 docker compose up -d
 
 ### Voir les logs en direct
+
 docker compose logs odoo -f
 
 ### Mettre à jour la liste des modules
+
 docker compose exec odoo odoo -u base -d odoo17-db --stop-after-init
 
 ### Installer le module
+
 docker compose exec odoo odoo -i mon_blog -d odoo17-db --stop-after-init
 
 ### Redémarrer odoo seul (après modif d'un module)
+
 docker compose restart odoo
 
-### Arrêter tout
-docker compose down
+### nettoyage bdd
 
+docker exec -it odoo17-db psql -h db -U odoo odoo17-db
+
+
+### Arrêter tout
+
+docker compose down
 
 ## mise en place
 
@@ -54,8 +66,14 @@ docker compose up -d
 docker compose exec odoo odoo -u base -d odoo17-db --stop-after-init
 docker compose exec odoo odoo -i mon_blog -d odoo17-db --stop-after-init
 docker compose restart odoo
-http://localhost:8069/web?debug=1
 maj de la liste + activer "mon blog"
+http://localhost:8069/web?debug=1
+
+## Notes
+
+Odoo Studio ?
+API WP & autre
+lang / slug des urls du coup ?
 
 ## étapes pour l'installer sur vps ovh
 
@@ -64,6 +82,7 @@ bash# Identifier le nom du conteneur PostgreSQL
 docker ps
 
 ### Faire le dump
+
 docker exec -t nom_conteneur_pg pg_dump -U odoo nom_bdd > dump.sql
 
 Étape 2 — Exporter le filestore

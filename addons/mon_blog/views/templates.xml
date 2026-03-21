@@ -1,203 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-<!-- ==============================
-     BACKEND : Menus & Vues admin
-=============================== -->
-
-<!-- Action pour ouvrir la liste des articles -->
-<record id="action_blog_article" model="ir.actions.act_window">
+  <!-- Actions -->
+  <record id="action_blog_article" model="ir.actions.act_window">
     <field name="name">Articles de blog</field>
     <field name="res_model">mon.blog.article</field>
     <field name="view_mode">list,form</field>
-</record>
+  </record>
 
-<!-- Action pour ouvrir la liste des tags -->
-<record id="action_blog_tag" model="ir.actions.act_window">
+  <record id="action_blog_tag" model="ir.actions.act_window">
     <field name="name">Tags</field>
     <field name="res_model">mon.blog.tag</field>
     <field name="view_mode">list,form</field>
-</record>
+  </record>
 
-<!-- Menu principal -->
-<menuitem id="menu_blog_root"
-          name="Blog"
-          sequence="100"/>
+  <record id="action_blog_comment" model="ir.actions.act_window">
+    <field name="name">Commentaires</field>
+    <field name="res_model">mon.blog.comment</field>
+    <field name="view_mode">list,form</field>
+  </record>
 
-<!-- Sous-menu Articles -->
-<menuitem id="menu_blog_articles"
-          name="Articles"
-          parent="menu_blog_root"
-          action="action_blog_article"
-          sequence="1"/>
+  <!-- Menu racine -->
+  <menuitem id="menu_blog_root"
+            name="Blog"
+            sequence="100"/>
 
-<!-- Sous-menu Tags -->
-<menuitem id="menu_blog_tags"
-          name="Tags"
-          parent="menu_blog_root"
-          action="action_blog_tag"
-          sequence="2"/>
-          
-    <!-- ==============================
-         LAYOUT : menu website
-    =============================== -->
-    <template id="blog_nav_item" inherit_id="website.layout" name="Blog Nav">
-        <xpath expr="//ul[hasclass('navbar-nav')]" position="inside">
-            <li class="nav-item">
-                <a class="nav-link" href="/blog">Blog</a>
-            </li>
-        </xpath>
-    </template>
+  <!-- Sous-menus -->
+  <menuitem id="menu_blog_articles"
+            name="Articles"
+            parent="menu_blog_root"
+            action="action_blog_article"
+            sequence="1"/>
 
-    <!-- ==============================
-         PAGE LISTE
-    =============================== -->
-    <template id="blog_list_template" name="Blog - Liste des articles">
-        <t t-call="website.layout">
-            <div class="container my-5">
+  <menuitem id="menu_blog_tags"
+            name="Tags"
+            parent="menu_blog_root"
+            action="action_blog_tag"
+            sequence="2"/>
 
-                <!-- Header -->
-                <div class="row mb-4">
-                    <div class="col">
-                        <h1 class="blog-title">Notre Blog</h1>
-                        <p class="text-muted">Retrouvez tous nos articles</p>
-                    </div>
-                </div>
+  <menuitem id="menu_blog_comment"
+            name="Commentaires"
+            parent="menu_blog_root"
+            action="action_blog_comment"
+            sequence="3"/>
 
-                <!-- Tags filtres -->
-                <div class="row mb-4">
-                    <div class="col">
-                        <a href="/blog" class="btn btn-sm btn-outline-secondary me-1">Tous</a>
-                        <t t-foreach="tags" t-as="tag">
-                            <a t-attf-href="/blog/tag/#{tag.name}"
-                               class="btn btn-sm btn-outline-primary me-1">
-                                <t t-esc="tag.name"/>
-                            </a>
-                        </t>
-                    </div>
-                </div>
-
-                <!-- Grille d'articles -->
-                <div class="row g-4">
-                    <t t-foreach="articles" t-as="article">
-                        <div class="col-md-4">
-                            <div class="card h-100 shadow-sm blog-card">
-
-                                <!-- Image -->
-                                <t t-if="article.image">
-                                    <img t-attf-src="/web/image/mon.blog.article/#{article.id}/image"
-                                         class="card-img-top blog-card-img" alt="cover"/>
-                                </t>
-
-                                <div class="card-body">
-                                    <!-- Tags -->
-                                    <div class="mb-2">
-                                        <t t-foreach="article.tag_ids" t-as="tag">
-                                            <span class="badge bg-primary me-1">
-                                                <t t-esc="tag.name"/>
-                                            </span>
-                                        </t>
-                                    </div>
-
-                                    <!-- Titre -->
-                                    <h5 class="card-title">
-                                        <a t-attf-href="/blog/#{article.slug}"
-                                           class="text-decoration-none text-dark">
-                                            <t t-esc="article.name"/>
-                                        </a>
-                                    </h5>
-
-                                    <!-- Résumé -->
-                                    <p class="card-text text-muted">
-                                        <t t-esc="article.resume"/>
-                                    </p>
-                                </div>
-
-                                <div class="card-footer d-flex justify-content-between text-muted small">
-                                    <span>
-                                        <i class="fa fa-user me-1"/>
-                                        <t t-esc="article.auteur_id.name"/>
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-calendar me-1"/>
-                                        <t t-esc="article.date_publication"/>
-                                    </span>
-                                    <span>
-                                        <i class="fa fa-eye me-1"/>
-                                        <t t-esc="article.nb_vues"/>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </t>
-
-                    <!-- Aucun article -->
-                    <t t-if="not articles">
-                        <div class="col text-center text-muted py-5">
-                            <i class="fa fa-newspaper-o fa-3x mb-3"/>
-                            <p>Aucun article publié pour le moment.</p>
-                        </div>
-                    </t>
-                </div>
-            </div>
-        </t>
-    </template>
-
-    <!-- ==============================
-         PAGE DETAIL
-    =============================== -->
-    <template id="blog_detail_template" name="Blog - Détail article">
-        <t t-call="website.layout">
-            <div class="container my-5">
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-
-                        <!-- Tags -->
-                        <div class="mb-3">
-                            <t t-foreach="article.tag_ids" t-as="tag">
-                                <span class="badge bg-primary me-1">
-                                    <t t-esc="tag.name"/>
-                                </span>
-                            </t>
-                        </div>
-
-                        <!-- Titre -->
-                        <h1 class="mb-3"><t t-esc="article.name"/></h1>
-
-                        <!-- Meta -->
-                        <div class="d-flex gap-3 text-muted small mb-4">
-                            <span><i class="fa fa-user me-1"/><t t-esc="article.auteur_id.name"/></span>
-                            <span><i class="fa fa-calendar me-1"/><t t-esc="article.date_publication"/></span>
-                            <span><i class="fa fa-eye me-1"/><t t-esc="article.nb_vues"/> vues</span>
-                        </div>
-
-                        <!-- Image -->
-                        <t t-if="article.image">
-                            <img t-attf-src="/web/image/mon.blog.article/#{article.id}/image"
-                                 class="img-fluid rounded mb-4 w-100" alt="cover"/>
-                        </t>
-
-                        <!-- Résumé -->
-                        <p class="lead text-muted border-start border-primary ps-3 mb-4">
-                            <t t-esc="article.resume"/>
-                        </p>
-
-                        <!-- Contenu HTML -->
-                        <div class="blog-content">
-                            <t t-out="article.contenu"/>
-                        </div>
-
-                        <!-- Retour -->
-                        <div class="mt-5">
-                            <a href="/blog" class="btn btn-outline-secondary">
-                                ← Retour au blog
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </t>
-    </template>
+  <menuitem id="menu_blog_config"
+            name="Configuration Blog"
+            parent="menu_blog_root"
+            action="action_blog_config"
+            sequence="4"/>
 
 </odoo>

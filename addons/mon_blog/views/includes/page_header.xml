@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <template id="page_header" name="Header des pages">
+            <div class="row mb-4">
+                <div class="col text-center">
+                    <h1 class="blog-title">
+                        <t t-out="main_object.name.upper()"/>
+                    </h1>
+                    <p class="text-muted">
+                        <t t-out="main_object.website_meta_description"/>
+                    </p>
+                </div>
+            </div>
+        </template>
+    </data>
+</odoo>

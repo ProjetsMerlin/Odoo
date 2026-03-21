@@ -1,0 +1,71 @@
+<odoo>
+    <data>
+        <template id="blog_list" name="Liste des articles">
+            <div class="row g-4">
+                <t t-foreach="articles" t-as="article">
+                    <div class="col-md-4">
+                        <div class="card h-100 shadow-sm blog-card">
+                            <a t-attf-href="/blog/#{article.slug}" class="text-decoration-none text-dark">
+                                <!-- Image -->
+                                <t t-if="article.image">
+                                    <img t-attf-src="/web/image/mon.blog.article/#{article.id}/image" class="card-img-top blog-card-img" t-att-alt="article.name" t-att-title="article.name"/>
+                                </t>
+                                <t t-else="">
+                                    <img t-attf-src="/web/image/website/#{website.id}/logo" class="card-img-top blog-card-img" alt="Logo"/>
+                                </t>
+                                
+                                <div class="card-body">
+                                    <!-- Title -->
+                                    <h5 class="card-title">
+                                        <t t-out="article.name"/>
+                                    </h5>
+                                    
+                                    <!-- Excerpt -->
+                                    <p class="card-text text-muted">
+                                        <t t-out="article.resume"/>
+                                    </p>
+                                    
+                                    <!-- Tags -->
+                                    <t t-if="article.tag_ids">
+                                        <div class="mb-2">
+                                            <t t-foreach="article.tag_ids" t-as="tag">
+                                                <t t-set="class_tag" t-value="'btn btn-sm btn-outline-primary px-6 py-8 color_' + str(tag.color)"/>
+                                                <span t-att-class="class_tag">
+                                                    <t t-out="tag.name.upper()"/>
+                                                </span>
+                                            </t>
+                                        </div>
+                                    </t>
+                                </div>
+                            </a>
+                            
+                            <!-- Meta -->
+                            <div class="card-footer d-flex justify-content-between text-muted small">
+                                <span>
+                                    <i class="fa fa-user me-1"/>
+                                    <t t-out="article.auteur_id.name"/>
+                                </span>
+                                <span>
+                                    <i class="fa fa-calendar me-1"/>
+                                    <t t-out="article.date_publication"/>
+                                </span>
+                                <span>
+                                    <i class="fa fa-eye me-1"/>
+                                    <t t-out="article.nb_vues"/>
+                                </span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </t>
+            </div>
+            <div>
+                <t t-if="not articles">
+                    <div class="col text-center text-muted py-5">
+                        <t t-out="text_no_articles"/>
+                    </div>
+                </t>
+            </div>
+        </template>
+    </data>
+</odoo>
