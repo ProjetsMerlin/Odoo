@@ -51,10 +51,9 @@ docker compose exec odoo odoo -i mon_blog -d odoo17-db --stop-after-init
 
 docker compose restart odoo
 
-### nettoyage bdd
+### nettoyage de la bdd
 
 docker exec -it odoo17-db psql -h db -U odoo odoo17-db
-
 
 ### Arrêter tout
 

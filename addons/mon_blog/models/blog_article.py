@@ -22,6 +22,11 @@ class BlogArticle(models.Model):
         ('archived',  'Archivé'),
     ], string='Statut', default='draft', required=True)
 
+    comment_autorise = fields.Selection([
+        ('comment_true', 'Oui'),
+        ('comment_false', 'Non'),
+    ], string='Commentaires autorisés', default='comment_true', required=True)
+
     comment_ids = fields.One2many(
         comodel_name='mon.blog.comment',
         inverse_name='article_id',

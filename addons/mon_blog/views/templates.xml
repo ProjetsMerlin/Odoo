@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-  <!-- Actions -->
+  <!-- Article -->
   <record id="action_blog_article" model="ir.actions.act_window">
     <field name="name">Articles de blog</field>
     <field name="res_model">mon.blog.article</field>

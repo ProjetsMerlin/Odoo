@@ -12,6 +12,7 @@
         'views/includes/blog_filter.xml',
         'views/includes/blog_list.xml',
         'views/comments.xml',
+        'views/articles_wizards.xml',
         'views/templates.xml',
         'views/articles.xml',
         'views/article.xml',
