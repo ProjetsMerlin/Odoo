@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="view_publish_wizard_form" model="ir.ui.view">
+      <field name="name">mon.blog.publish.wizard.form</field>
+      <field name="model">mon.blog.publish.wizard</field>
+      <field name="arch" type="xml">
+        <form string="Publier des articles">
+          <sheet>
+            <group>
+              <field name="nb_articles" readonly="1"/>
+              <field name="state"/>
+            </group>
+          </sheet>
+          <footer>
+            <button name="action_confirm"
+                    type="object"
+                    string="Confirmer"
+                    class="btn-primary"/>
+            <button string="Annuler"
+                    class="btn-secondary"
+                    special="cancel"/>
+          </footer>
+        </form>
+      </field>
+    </record>
+
+    <!-- Action qui ouvre le wizard -->
+    <record id="action_publish_wizard" model="ir.actions.act_window">
+      <field name="name">Changer le statut</field>
+      <field name="res_model">mon.blog.publish.wizard</field>
+      <field name="view_mode">form</field>
+      <field name="target">new</field>  <!-- new = popup -->
+      <field name="binding_model_id" ref="model_mon_blog_article"/>
+      <field name="binding_view_types">list</field>
+    </record>
+
+  </data>
+</odoo>

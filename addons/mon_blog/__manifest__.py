@@ -6,7 +6,10 @@
     'depends': ['website'],
     'data': [
         'security/ir.model.access.csv',
+        # 'views/res_partner_views.xml',
         'data/config.xml',
+        'report/article_report.xml',    
+        'report/article_template.xml',  
         'views/dashboard.xml',
         'views/includes/page_header.xml',
         'views/includes/blog_filter.xml',

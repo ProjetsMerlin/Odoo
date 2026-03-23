@@ -1,6 +1,19 @@
 # odoo
 
-Template de base odoo
+Un petit projet qui me pertmet de mémoriser toutes les fonctionnalités du CRM Odoo.
+
+## Vous y trouverez ...
+
+- Structure d'un module — __manifest__.py, __init__.py, arborescence des dossiers
+- Les modèles — models.py, types de champs, _name, _inherit, _order
+- Les champs relationnels — Many2one, One2many, Many2many, Select, Char, champs computed et @api.depends
+- Les vues backend — form, list/tree, search, notebook, | widgets, kanban
+- La sécurité — ir.model.access.csv, groupes, record rules, noupdate
+- Les contrôleurs — http.route, request.env, request.render, auth, website
+- Les templates QWeb — t-if, t-foreach, t-call, t-set, t-att, t-attf
+- Les wizards — TransientModel, vues formulaire popup, actions depuis une liste
+- Les rapports PDF — QWeb report, ir.actions.report, mise en page, données dynamiques
+- L'héritage — _inherit, surcharge de vues par xpath, extension de contrôleurs et modèles existants
 
 ## Structure du projet
 
@@ -43,7 +56,7 @@ docker compose logs odoo -f
 
 docker compose exec odoo odoo -u base -d odoo17-db --stop-after-init
 
-### Installer le module
+### Installer / MAJ du module
 
 docker compose exec odoo odoo -i mon_blog -d odoo17-db --stop-after-init
 
@@ -62,13 +75,12 @@ docker compose down
 ## mise en place
 
 docker compose up -d
-docker compose exec odoo odoo -u base -d odoo17-db --stop-after-init
 docker compose exec odoo odoo -i mon_blog -d odoo17-db --stop-after-init
 docker compose restart odoo
-maj de la liste + activer "mon blog"
+maj de la liste + maj du module
 http://localhost:8069/web?debug=1
 
-## Notes
+## Future
 
 Odoo Studio ?
 API WP & autre
